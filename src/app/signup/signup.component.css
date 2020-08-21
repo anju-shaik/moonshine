@@ -1,0 +1,18 @@
+#content {
+    margin: auto;
+    padding: 10px;
+    
+    }
+
+mydiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+}
+
+#small-font  {
+    display:inline-block;
+    font-size: 13px;
+}
+
