@@ -1,19 +1,19 @@
 <div class="container" >
     <h2 class="text-center">Login Moonshine</h2>
     
-    <form  #loginForm ='ngForm' class="form-horizontal"  (ngSubmit)="onSubmit(loginForm.value)" >
+    <form  #loginForm ='ngForm' class="form-horizontal"  (ngSubmit)="loginForm.form.valid && onSubmit(loginForm.value)" >
       <!-- <form  class="form-horizontal"  > -->
       <div class="form-group ">
         <label class="control-label" for="email">Email:</label>
         <div class="col-sm-6">
-          <input type="email" class="form-control col-sm-6" id="email" placeholder="Enter email" name="email" ngModel>
+          <input type="email" class="form-control col-sm-6" id="email" placeholder="Enter email" name="email" ngModel required>
         </div>
       </div>
 
       <div class="form-group">
         <label class="control-label" for="pwd">Password:</label>
         <div class="col-sm-6 ">          
-          <input type="password" class="form-control col-sm-6 " id="pwd" placeholder="Enter password" name="pwd" ngModel>
+          <input type="password" class="form-control col-sm-6 " id="pwd" placeholder="Enter password" name="pwd" ngModel required>
         </div>
       </div>
 
