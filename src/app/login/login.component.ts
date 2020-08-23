@@ -19,23 +19,17 @@ export class LoginComponent implements OnInit {
   // };  
 
   userLogindata : UserModel[];
+  flag:boolean=false;
 
   constructor(private userLoginService:userLoginService) {
     // console.log(this.user);
    }
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void { 
 }
 
-// getuser(data){
-  
-//   data=this.userdataservice.getUserdata(data);
-//   this.user=data[2];
-//   console.log(data)
-//   console.log(this.user);
-// }
     getuserlogin(data){
+      this.flag=!this.flag;
       data = this.userLoginService.getUserLogindata(data);
       this.userLogindata = data;
       console.log(data);
@@ -47,7 +41,13 @@ export class LoginComponent implements OnInit {
       
     }
 
-    onSubmit(data){
-      console.log(data);
+    onSubmit(userlogin){
+      console.log(this.userLogindata)
+      this.userLoginService.setUserdata(userlogin.email,userlogin.pwd);
+      // console.log(this.userLoginService.user)
+    }
+
+    deleteUser(index:number){
+      this.userLoginService.deleteUser(index);
     }
   }

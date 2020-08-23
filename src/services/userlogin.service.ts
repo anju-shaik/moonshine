@@ -12,17 +12,18 @@ export class userLoginService {
 
   user:LoginModel[]=[
     {email:'admin@admin.com',password:'admin'},
-    {email:'abc@g.com',password:'abc'}
+    {email:'user@user.com',password:'user'}
   ];
 
   getUserLogindata(data){
-    return this.user[data];
+    return this.user;
   }
 
   setUserdata(email,pwd){
-    return this.user.push(email,pwd);
-  }
+    return this.user.push({email:email, password:pwd})
+}
 
-
-
+deleteUser(index:number){
+  return this.user.splice(index,1);
+}
 }

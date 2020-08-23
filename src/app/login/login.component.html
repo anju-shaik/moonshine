@@ -1,8 +1,8 @@
 <div class="container" >
     <h2 class="text-center">Login Moonshine</h2>
     
-    <!-- <form #LoginForm ='ngForm' class="form-horizontal"  (ngSubmit)="onSubmit(LoginForm.value)"> -->
-      <form  class="form-horizontal"  >
+    <form  #loginForm ='ngForm' class="form-horizontal"  (ngSubmit)="onSubmit(loginForm.value)" >
+      <!-- <form  class="form-horizontal"  > -->
       <div class="form-group ">
         <label class="control-label" for="email">Email:</label>
         <div class="col-sm-6">
@@ -40,6 +40,15 @@
     </form>
   </div>
 
+  <div>
+  <button (click)="getuserlogin($event)">userdata</button>
+  <p *ngIf="flag">List of users</p>
+  <div *ngFor="let user of userLogindata;let i=index">     
+    <p > Email : {{user.email}}  | Password: {{user.password}} <button class="btn-sm btn-danger" (click)=deleteUser(i)>-</button></p> 
+    
+    
+  </div>
+</div>
 <!-- <hr>
 
    <div class="mydiv text-center form-group">

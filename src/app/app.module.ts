@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-// import { FormsModule } from '@angular/forms';
-// import { NgForm } from '@angular/Forms';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router'
+//  import { NgForm } from '@angular/Forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,14 +14,13 @@ import { SignupComponent } from './signup/signup.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent,
-    // FormsModule,
-    // NgForm
- 
+    SignupComponent    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule    
+    AppRoutingModule  ,
+    RouterModule   ,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
