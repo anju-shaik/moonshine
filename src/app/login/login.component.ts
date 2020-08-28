@@ -32,8 +32,6 @@ export class LoginComponent implements OnInit {
       this.flag=!this.flag;
       data = this.userLoginService.getUserLogindata(data);
       this.userLogindata = data;
-      console.log(data);
-      console.log(this.userLogindata)
     }
 
     setuserlogin(email,pwd){
