@@ -1,19 +1,35 @@
 <div class="container" >
     <h2 class="text-center">Login Moonshine</h2>
     
-    <form  #loginForm ='ngForm' class="form-horizontal"  (ngSubmit)="loginForm.form.valid && onSubmit(loginForm.value)" >
-      <!-- <form  class="form-horizontal"  > -->
+    <form  #loginForm ='ngForm' class="form-horizontal" (ngSubmit)="loginForm.form.valid && onSubmit(loginForm.value)">
+      <!-- loginForm: {{ userLogindata}} <br> -->
+      <!-- userLogindata: {{userLogindata | json}} <br> -->
+      loginFormvalue json: {{loginForm.value | json  }}
+
       <div class="form-group ">
         <label class="control-label" for="email">Email:</label>
         <div class="col-sm-6">
-          <input type="email" class="form-control col-sm-6" id="email" placeholder="Enter email" name="email" ngModel required>
+          <input type="email" #email="ngModel" #emailid [class.is-invalid]="email.invalid && email.touched" class="form-control col-sm-6" placeholder="Enter email" id="email" name="email"  ngModel required pattern=".+\@.+\..+" autocomplete="off" minlength=5>
+          <!-- <small class="text-danger" [class.d-none]="email.valid||email.untouched">Email is required</small> -->
+          <!-- {{emailid.className}} -->
         </div>
       </div>
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+        <small  *ngIf="email.errors.required && email.touched">Email is Required</small>
+        <small  *ngIf="email.errors.pattern">Email must have @ .</small>
+        <small  *ngIf="email.errors.minlength"> Email must be at least 5 characters long.</small>
+      </div>
+      <!-- {{email.className}} -->
+      <!-- {{email.valid}} -->
+      <!-- <div *ngIf="loginForm.value.email.invalid">
+        <p>Name required</p>
 
-      <div class="form-group">
-        <label class="control-label" for="pwd">Password:</label>
+      </div> -->
+
+        <div class="form-group">
+        <label class="control-label" for="password">Password:</label>
         <div class="col-sm-6 ">          
-          <input type="password" class="form-control col-sm-6 " id="pwd" placeholder="Enter password" name="pwd" ngModel required>
+          <input type="password" class="form-control col-sm-6" #password="ngModel" [class.is-invalid]="password.invalid && password.touched" placeholder="Enter password" name="password" ngModel required maxlength="8" minlength="2">
         </div>
       </div>
 
@@ -27,7 +43,8 @@
 
       <div class="form-group">        
         <div class="col-sm-offset-2 col-sm-10 ">
-          <button type="submit" class="btn btn-default btn-success">Submit</button>
+          <button type="submit" class="btn btn-default btn-success" loginform=valid 
+          [disabled]="!loginForm.valid">Submit</button>
         </div>
 
         <div id ="small-font">        
@@ -40,11 +57,12 @@
     </form>
   </div>
 
-  <div>
-  <button (click)="getuserlogin($event)">userdata</button>
-  <p *ngIf="flag">List of users</p>
+  <button class="btn-warning" (click)="getUserLogin($event)">show users</button>
+  <div *ngIf="flag">  
+  <p>List of users</p>
   <div *ngFor="let user of userLogindata;let i=index">     
-    <p > Email : {{user.email}}  | Password: {{user.password}} <button class="btn-sm btn-danger" (click)=deleteUser(i)>-</button></p> 
+    <p > Email : {{user.email}}  | Password: {{user.password}} <button class="btn-sm btn-danger" 
+      (click)=deleteUser(i)>-</button></p>    
     
   </div>
 </div>

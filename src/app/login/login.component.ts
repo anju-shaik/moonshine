@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { userLoginService } from '../../services/userlogin.service';
-import { UserModel } from '../model/user.model';
+import { LoginModel } from '../model/login.model';
+
 
 @Component({
   selector: 'app-login',
@@ -9,17 +10,9 @@ import { UserModel } from '../model/user.model';
 })
 export class LoginComponent implements OnInit {
 
-  // user : userModel = {
-  //   name:undefined,
-  //   email:undefined,
-  //   address:undefined,
-  //   phoneno:undefined,
-  //   password:undefined,
-  //   country:undefined,
-  // };  
-
-  userLogindata : UserModel[];
-  flag:boolean=false;
+  userLogindata : LoginModel[] = [{email:undefined, password:undefined}];
+  //userLogindata : LoginModel[];
+  flag : boolean = false;
 
   constructor(private userLoginService:userLoginService) {
     // console.log(this.user);
@@ -28,21 +21,33 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void { 
 }
 
-    getuserlogin(data){
+    // getuserlogin(data){
+    //   this.flag=!this.flag;
+    //   data = this.userLoginService.getUserLogindata(data);
+    //   this.userLogindata = data;
+    //   console.log(data);
+    //   // console.log(this.userLogindata)
+    // }
+
+    getUserLogin(data){
       this.flag=!this.flag;
       data = this.userLoginService.getUserLogindata(data);
       this.userLogindata = data;
     }
 
-    setuserlogin(email,pwd){
-      this.userLoginService.setUserdata(email,pwd);
+    setuserlogin(userdata: {email:string , password:string}){
+      this.userLoginService.setUserdata(userdata);
       
     }
 
-    onSubmit(userlogin){
-      console.log(this.userLogindata)
-      this.userLoginService.setUserdata(userlogin.email,userlogin.pwd);
-      // console.log(this.userLoginService.user)
+    // onSubmit(userlogin){
+    //   this.userLoginService.setUserdata(userlogin.email,userlogin.pwd);
+    //   console.log(this.userLoginService.user)
+    // }
+
+    onSubmit(userdata: {email:string , password:string}){
+      this.userLoginService.setUserdata(userdata);
+      console.log(userdata)
     }
 
     deleteUser(index:number){

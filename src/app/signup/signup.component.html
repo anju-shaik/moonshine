@@ -1,39 +1,65 @@
 <div class="container container-fluid " id="content">
   <h2 class="text-center">Signup Moonshine</h2>
 
+  <form class="form-horizontal" #signupForm="ngForm">
+
     <div class="form-group ">
-      <label class="control-label" for="name">Name</label>
-      <div class="col-sm-6">
-        <input type="text" class="form-control "  placeholder="Enter name" name="name" required>
+      <label class="control-label" for="id">Enter id </label>
+      <div>
+        <input type="text" 
+        class="form-control" 
+        ngModel 
+        name="idname" 
+        #id="ngModel" required>
+        <span class="text-danger help-block" *ngIf="id.invalid && id.touched">Please enter valid id</span> <br>
       </div>
     </div>
+
+
+    <div class="form-group ">
+      <label class="control-label" for="name">Name</label>
+      <div>
+        <input type="text" class="form-control" #name placeholder="Enter name" name="name" required ngModel
+          autocomplete="off">    
+          {{signupForm.value | json}}
+      </div>
+    </div>
+ 
 
     <div class="form-group ">
       <label class="control-label" for="email">Email:</label>
-      <div class="col-sm-6">
-        <input type="email" class="form-control "  placeholder="Enter email" name="email" required>
+      <div>
+        <input type="email" class="form-control " placeholder="Enter email" name="email" required ngModel
+          autocomplete="off">
       </div>
     </div>
 
-    <div class="form-group ">
-      <label class="control-label" for="address">Address:</label>
-      <div class="col-sm-6">
-        <textarea placeholder="Enter address" type="text" class="form-control col-sm-6" name="address" ></textarea>                   
+    <div class="form-group" ngModelGroup="userAddress">
+      <label class="control-label" for="address1">Address </label>
+      <div>
+        <textarea placeholder="Enter address" type="text" class="form-control col-sm-6" rows=2 name="address" ngModel
+          autocomplete="off"></textarea>
       </div>
-      
+      <div>
+        <label class="control-label" for="state">State</label>
+        <input placeholder="Enter state" type="text" class="form-control col-sm-6" rows=1 name="state" ngModel
+          autocomplete="off">
+      </div>
+
     </div>
     <div class="form-group ">
       <label class="control-label" for="phoneno">Phone Number</label>
-      <div class="col-sm-6">
-        <input type="text" class="form-control col-sm-6"  placeholder="Enter phone number" name="phoneno" required>
+      <div>
+        <input type="text" class="form-control col-sm-6" placeholder="Enter phone number" name="phoneno" required
+          ngModel autocomplete="off">
       </div>
     </div>
 
     <div class="form-group ">
-      <label class="control-label" for="gender">Gender:</label>
-      <div class="col-sm-6">
+      <label class="control-label" for="gender" name="gender">Gender:</label>
+      <div>
         <label class="col-sm-3">
-          <input class="col-sm-2" for="female" type="radio" name="gender" >Female</label>
+          <input class="col-sm-2" for="female" type="radio" name="gender">Female</label>
         <label class=" col-sm-3">
           <input class="col-sm-2" for="male" type="radio" name="gender">Male</label>
       </div>
@@ -41,30 +67,41 @@
 
     <div class="form-group">
       <label class="control-label" for="pwd">Password:</label>
-      <div class="col-sm-6 ">          
-        <input type="password" class="form-control col-sm-6 " placeholder="Enter password" name="pwd" required>
-        {{password}}
+      <div>
+        <input type="password" class="form-control" placeholder="Enter password" name="pwd" required
+          [(ngModel)]="password" #pwd="ngModel" autocomplete="off">
+        <small *ngIf="pwd.dirty" class="text-primary">Your password : {{password}} </small>
       </div>
     </div>
 
-    <div class="dropdown form-group ">
+    <div class="form-group ">
       <label class="control-label" for="country">Select Region</label>
       <div class="form-group">
-       <select class="control-label col-sm-3" name="country" >
-          <option value="asia">Asia</option>
-          <option value="africa">Africa</option>
-          <option value="europe">Europe</option>
-          <option value="antarctica">Antarctica</option>
-          <option value="northAmerica">North America</option>
-          <option value="southAmerica">South America</option>
+        <select 
+         (blur)="validateCountry(country.value)" 
+         [class.in-valid]="countryHasError && country.touched"
+          class="control-label" 
+          [ngModel]="defaultvalue" 
+          #country="ngModel" 
+          name="country" 
+          required>
+          <!-- <option value="asia">Asia</option> -->
+          <option *ngFor="let country of countries">{{country}}</option>
         </select>
+
+        <small class="text-danger" 
+        [class.d-none]="!countryHasError||country.untouched"> 
+          Please choose a region
+        </small>
       </div>
     </div>
-<br>
-    <div class="form-group">        
+
+    <br>
+
+    <div class="form-group">
       <div class="col-sm-10 ">
-        <button type="submit" class="btn btn-default btn-success">Submit</button>
-      </div >
+        <button type="submit" class="btn btn-default btn-success" [disabled]="!signupForm.valid">Submit</button>
+      </div>
     </div>
 
     <div class="form-grop" id="small-font">

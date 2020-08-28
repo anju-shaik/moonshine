@@ -10,8 +10,22 @@ export class SignupComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+   
   }
 
-  password:string;
+  password:string='';
+  defaultvalue = "Asia"
+  countries:String[] = ['Asia','Africa','Europe','North America','South America','Antarctica'];
+
+  countryHasError = true;
+
+  validateCountry(value){
+    if(value === 'default'){
+      this.countryHasError = true;
+    }
+    else 
+    this.countryHasError = false;
+  }
+  
 
 }

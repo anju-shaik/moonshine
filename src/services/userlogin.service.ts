@@ -15,15 +15,22 @@ export class userLoginService {
     {email:'user@user.com',password:'user'}
   ];
 
-  getUserLogindata(data){
+  // getUserLogindata(data){
+  //   return this.user;
+  // }
+
+  getUserLogindata(data: {email:string , password:string} ){
     return this.user;
   }
 
-  setUserdata(email,pwd){
-    return this.user.push({email:email, password:pwd})
-}
+//   setUserdata(email,pwd){
+//     return this.user.push({email:email, password:pwd})
+// }
 
-deleteUser(index:number){
-  return this.user.splice(index,1);
-}
+    setUserdata(userdata: {email:string , password:string}){
+       return this.user.push(userdata);
+    }
+    deleteUser(index:number){
+        return this.user.splice(index,1);
+    }
 }
